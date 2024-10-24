@@ -6,38 +6,38 @@ export class SalesAggregate {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: true })
-  startDate: string;
+  @Column({ nullable: true, default: null })
+  startDate: string | null;
 
-  @Column({ nullable: true })
-  endDate: string;
+  @Column({ nullable: true, default: null })
+  endDate: string | null;
 
-  @Column({ nullable: true, type: 'int' })
-  customerReturns: number;
+  @Column({ nullable: true, type: 'int', default: 0 })
+  customerReturns: number | null;
 
-  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2 })
-  orderedRevenueAmount: number;
+  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  orderedRevenueAmount: number | null;
 
-  @Column({ nullable: true })
-  orderedRevenueCurrency: string;
+  @Column({ nullable: true, default: null })
+  orderedRevenueCurrency: string | null;
 
-  @Column({ nullable: true, type: 'int' })
-  orderedUnits: number;
+  @Column({ nullable: true, type: 'int', default: 0 })
+  orderedUnits: number | null;
 
-  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2 })
-  shippedCogsAmount: number;
+  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  shippedCogsAmount: number | null;
 
-  @Column({ nullable: true })
-  shippedCogsCurrency: string;
+  @Column({ nullable: true, default: null })
+  shippedCogsCurrency: string | null;
 
-  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2 })
-  shippedRevenueAmount: number;
+  @Column({ nullable: true, type: 'decimal', precision: 10, scale: 2, default: 0.0 })
+  shippedRevenueAmount: number | null;
 
-  @Column({ nullable: true })
-  shippedRevenueCurrency: string;
+  @Column({ nullable: true, default: null })
+  shippedRevenueCurrency: string | null;
 
-  @Column({ nullable: true, type: 'int' })
-  shippedUnits: number;
+  @Column({ nullable: true, type: 'int', default: 0 })
+  shippedUnits: number | null;
 
   @OneToMany(() => SalesByAsin, (salesByAsin) => salesByAsin.salesAggregate)
   salesByAsin: SalesByAsin[];
