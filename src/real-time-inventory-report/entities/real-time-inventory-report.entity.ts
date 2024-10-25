@@ -1,4 +1,3 @@
- 
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
@@ -15,6 +14,7 @@ export class RealTimeInventory {
     @Column({ nullable: false })
     asin: string;
 
-    @Column({ type: 'int', nullable: false })
-    highlyAvailableInventory: number;
+    
+    @Column({ type: 'int', nullable: true })  
+    highlyAvailableInventory: number | null;
 }

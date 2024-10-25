@@ -1,41 +1,44 @@
- 
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { NetPureProductMarginByAsin } from './netpure-product-margin-by-asin.entity';
 
 @Entity()
 export class NetPureReport {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column({ nullable: true })
-    reportType: string;
+  @Column({ nullable: true })
+  reportType: string;
 
-    @Column({ type: 'jsonb', nullable: true })
-    reportOptions: {
-        reportPeriod: string;
-    };
+  // reportOptions as separate fields
+  @Column({ nullable: true })
+  reportPeriod: string; // from reportOptions.reportPeriod
 
-    @Column({ type: 'date', nullable: true })
-    lastUpdatedDate: Date;
+  @Column({ type: 'date', nullable: true })
+  lastUpdatedDate: Date;
 
-    @Column({ type: 'date', nullable: true })
-    dataStartTime: Date;
+  @Column({ type: 'date', nullable: true })
+  dataStartTime: Date;
 
-    @Column({ type: 'date', nullable: true })
-    dataEndTime: Date;
+  @Column({ type: 'date', nullable: true })
+  dataEndTime: Date;
 
-    @Column('jsonb', { nullable: true })
-    marketplaceIds: string[];
+  // marketplaceIds stored as JSON but you can treat it as an array of strings
+  @Column('jsonb', { nullable: true })
+  marketplaceIds: string[];
 
-    @OneToMany(() => NetPureProductMarginByAsin, (netPureProductMarginByAsin) => netPureProductMarginByAsin.netPureReport, {
-        cascade: true,
-    })
-    netPureProductMarginByAsins: NetPureProductMarginByAsin[];
+  // netPureProductMarginByAsins relationship
+  @OneToMany(() => NetPureProductMarginByAsin, (netPureProductMarginByAsin) => netPureProductMarginByAsin.netPureReport, {
+    cascade: true,
+  })
+  netPureProductMarginByAsins: NetPureProductMarginByAsin[];
 
-    @Column('jsonb', { nullable: true })
-    netPureProductMarginAggregate: {
-        startDate: Date;
-        endDate: Date;
-        netPureProductMargin: number;
-    }[];
+  // netPureProductMarginAggregate as separate fields
+  @Column({ type: 'date', nullable: true })
+  netPureProductMarginAggregateStartDate: Date;
+
+  @Column({ type: 'date', nullable: true })
+  netPureProductMarginAggregateEndDate: Date;
+
+  @Column('float', { nullable: true })
+  netPureProductMargin: number;
 }
