@@ -1,19 +1,19 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('real_time_traffic_report')
+@Entity("amazon_real_time_traffic_report")
 export class RealTimeTrafficReport {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ name: 'start_time' })
     startTime: Date;
 
-    @Column()
+    @Column({ name: 'end_time' })
     endTime: Date;
 
-    @Column()
+    @Column({ name: 'asin' })
     asin: string;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'int', name: 'glance_views' })
     glanceViews: number;
 }

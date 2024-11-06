@@ -1,36 +1,35 @@
-// src/forcast-report/entities/forecast-by-asin.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { ForecastReport } from './forcast-report.entity';
 
-@Entity()
+@Entity("amazon_forecast_by_asin")  
 export class ForecastByAsin {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'date' })
+    @Column({ type: 'date', name: 'forecast_generation_date' })  
     forecastGenerationDate: Date;
 
-    @Column()
+    @Column({ name: 'asin' })
     asin: string;
 
-    @Column({ type: 'date' })
+    @Column({ type: 'date', name: 'start_date' })  
     startDate: Date;
 
-    @Column({ type: 'date' })
+    @Column({ type: 'date', name: 'end_date' })  
     endDate: Date;
 
-    @Column()
+    @Column({ name: 'mean_forecast_units' })  
     meanForecastUnits: number;
 
-    @Column()
+    @Column({ name: 'p70_forecast_units' })  
     p70ForecastUnits: number;
 
-    @Column()
+    @Column({ name: 'p80_forecast_units' })  
     p80ForecastUnits: number;
 
-    @Column()
+    @Column({ name: 'p90_forecast_units' })  
     p90ForecastUnits: number;
 
     @ManyToOne(() => ForecastReport, (forecastReport) => forecastReport.forecastByAsins)
-    forecastReport: ForecastReport; // This establishes the relation back to the ForecastReport entity
+    forecastReport: ForecastReport;
 }

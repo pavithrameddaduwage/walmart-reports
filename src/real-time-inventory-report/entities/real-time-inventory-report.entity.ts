@@ -1,20 +1,19 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity("amazon_real_time_inventory")
 export class RealTimeInventory {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'timestamp', nullable: false })
-    startTime: Date;
+    @Column({ type: 'timestamp', nullable: true, name: 'start_time' })  
+    startTime: Date | null;
 
-    @Column({ type: 'timestamp', nullable: false })
-    endTime: Date;
+    @Column({ type: 'timestamp', nullable: true, name: 'end_time' })  
+    endTime: Date | null;
 
-    @Column({ nullable: false })
+    @Column({ nullable: false, name: 'asin' })
     asin: string;
 
-    
-    @Column({ type: 'int', nullable: true })  
+    @Column({ type: 'int', nullable: true, name: 'highly_available_inventory' })
     highlyAvailableInventory: number | null;
 }

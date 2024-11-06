@@ -1,21 +1,21 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { TrafficReport } from './traffic-report.entity';
 
-@Entity()
+@Entity("amazon_traffic_by_asin")
 export class TrafficByAsin {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', name: 'start_date' })
   startDate: Date;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', name: 'end_date' })
   endDate: Date;
 
-  @Column()
+  @Column({ name: 'asin' })
   asin: string;
 
-  @Column()
+  @Column({ name: 'glance_views' })
   glanceViews: number;
 
   @ManyToOne(() => TrafficReport, (trafficReport) => trafficReport.trafficByAsins)

@@ -1,14 +1,14 @@
-// src/forcast-report/forcast-report.controller.ts
-import { Controller, Post, Body } from '@nestjs/common';
+import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ForcastReportService } from './forcast-report.service';
-import { ForecastReport } from './entities/forcast-report.entity';
+import { CreateForcastReportDto } from './dto/create-forcast-report.dto';
 
-@Controller('forcast-report')
+@Controller('forecast-report')
 export class ForcastReportController {
     constructor(private readonly forcastReportService: ForcastReportService) {}
 
     @Post()
-    async create(@Body() data: any): Promise<ForecastReport> {
-        return this.forcastReportService.createForecastReport(data);
+    async create(@Body() createForcastReportDto: CreateForcastReportDto) {
+         
+        return await this.forcastReportService.createForecastReport(createForcastReportDto);
     }
 }
