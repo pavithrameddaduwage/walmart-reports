@@ -14,11 +14,11 @@ import { AmazonAsinCatalog } from './amazon-asincatalog/entities/amazon-asincata
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',  
+      host: 'horizonbs',  
       port: 5432,
       username: 'postgres',  
-      password: '0006',  
-      database: 'walmart_2',  
+      password: 'M!SAppsTest',  
+      database: 'amazon_db',  
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,  
     }),
