@@ -8,6 +8,6 @@ import { AmazonAsinCatalog } from './entities/amazon-asincatalog.entity';
   imports: [TypeOrmModule.forFeature([AmazonAsinCatalog])],
   controllers: [AmazonAsinCatalogController],
   providers: [AmazonAsinCatalogService],
-  exports: [AmazonAsinCatalogService],
+  exports: [AmazonAsinCatalogService],   
 })
 export class AmazonAsinCatalogModule {}

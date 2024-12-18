@@ -1,130 +1,167 @@
-import { IsString, IsBoolean, IsOptional, IsArray, IsObject, IsNumber, IsDate, IsInt } from 'class-validator';
+import { IsString, IsBoolean, IsOptional, IsArray, IsNumber, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { DeepPartial } from 'typeorm';
+
+class BrowseClassificationDto {
+  @IsString()
+  displayName: string;
+
+  @IsString()
+  classificationId: string;
+}
+
+class SummaryDto {
+  @IsString()
+  asin: string;
+
+  @IsString()
+  marketplaceId: string;
+
+  @IsBoolean()
+  adultProduct: boolean;
+
+  @IsBoolean()
+  autographed: boolean;
+
+  @IsString()
+  brand: string;
+
+  @ValidateNested()
+  @Type(() => BrowseClassificationDto)
+  browseClassification: BrowseClassificationDto;
+
+  @IsString()
+  color: string;
+
+  @IsString()
+  itemClassification: string;
+
+  @IsString()
+  itemName: string;
+
+  @IsString()
+  manufacturer: string;
+
+  @IsString()
+  modelNumber: string;
+
+  @IsNumber()
+  packageQuantity: number;
+
+  @IsString()
+  partNumber: string;
+
+  @IsString()
+  releaseDate: string;
+
+  @IsString()
+  style: string;
+
+  @IsBoolean()
+  tradeInEligible: boolean;
+
+  @IsString()
+  websiteDisplayGroup: string;
+
+  @IsString()
+  websiteDisplayGroupName: string;
+  memorabilia: DeepPartial<boolean>;
+}
+
+class ItemDto {
+  @IsString()
+  asin: string;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => SummaryDto)
+  summaries: SummaryDto[];
+}
 
 export class CreateAmazonAsincatalogDto {
-    @IsOptional()
-    @IsString()
-    asin: string | null;
+  @IsOptional()
+  @IsString()
+  asin: string | null;
 
-    @IsOptional()
-    @IsString()
-    marketplaceId: string;
+  @IsOptional()
+  @IsString()
+  marketplaceId: string;
 
-    @IsOptional()
-    @IsBoolean()
-    adultProduct: boolean;
+  @IsOptional()
+  @IsBoolean()
+  adultProduct: boolean;
 
-    @IsOptional()
-    @IsBoolean()
-    autographed: boolean;
+  @IsOptional()
+  @IsBoolean()
+  autographed: boolean;
 
-    @IsOptional()
-    @IsString()
-    brand: string;
+  @IsOptional()
+  @IsString()
+  brand: string;
 
-    @IsOptional()
-    @IsString()
-    browseClassificationDisplayName: string;
+  @IsOptional()
+  @IsString()
+  browseClassificationDisplayName: string;
 
-    @IsOptional()
-    @IsString()
-    browseClassificationId: string;
+  @IsOptional()
+  @IsString()
+  browseClassificationId: string;
 
-    @IsOptional()
-    @IsString()
-    color: string;
+  @IsOptional()
+  @IsString()
+  color: string;
 
-    @IsOptional()
-    @IsString()
-    itemClassification: string;
+  @IsOptional()
+  @IsString()
+  itemClassification: string;
 
-    @IsOptional()
-    @IsString()
-    itemName: string;
+  @IsOptional()
+  @IsString()
+  itemName: string;
 
-    @IsOptional()
-    @IsString()
-    manufacturer: string;
+  @IsOptional()
+  @IsString()
+  manufacturer: string;
 
-    @IsOptional()
-    @IsBoolean()
-    memorabilia: boolean;
+  @IsOptional()
+  @IsBoolean()
+  memorabilia: boolean;
 
-    @IsOptional()
-    @IsString()
-    modelNumber: string;
+  @IsOptional()
+  @IsString()
+  modelNumber: string;
 
-    @IsOptional()
-    @IsNumber()
-    packageQuantity: number;
+  @IsOptional()
+  @IsNumber()
+  packageQuantity: number;
 
-    @IsOptional()
-    @IsString()
-    partNumber: string;
+  @IsOptional()
+  @IsString()
+  partNumber: string;
 
-    @IsOptional()
-    @IsString()
-    releaseDate: string;
+  @IsOptional()
+  @IsString()
+  releaseDate: string;
 
-    @IsOptional()
-    @IsString()
-    style: string;
+  @IsOptional()
+  @IsString()
+  style: string;
 
-    @IsOptional()
-    @IsBoolean()
-    tradeInEligible: boolean;
+  @IsOptional()
+  @IsBoolean()
+  tradeInEligible: boolean;
 
-    @IsOptional()
-    @IsString()
-    websiteDisplayGroup: string;
+  @IsOptional()
+  @IsString()
+  websiteDisplayGroup: string;
 
-    @IsOptional()
-    @IsString()
-    websiteDisplayGroupName: string;
+  @IsOptional()
+  @IsString()
+  websiteDisplayGroupName: string;
 
-    @IsOptional()
-    @IsArray()
-    @IsObject({ each: true })
-    refinementsBrands: Array<{ numberOfResults: number; brandName: string }>;
-
-    @IsOptional()
-    @IsArray()
-    @IsObject({ each: true })
-    refinementsClassifications: Array<{ numberOfResults: number; displayName: string; classificationId: string }>;
-
-    // New fields added for extended details
-    @IsOptional()
-    @IsNumber()
-    price: number;
-
-    @IsOptional()
-    @IsString()
-    currency: string;
-
-    @IsOptional()
-    @IsNumber()
-    weight: number;
-
-    @IsOptional()
-    @IsString()
-    weightUnit: string; // e.g., "kg" or "lbs"
-
-    @IsOptional()
-    @IsObject()
-    dimensions: { length: number; width: number; height: number }; // Dimensions of the product
-
-    @IsOptional()
-    @IsBoolean()
-    stockAvailability: boolean; // Whether the item is in stock or not
-
-    @IsOptional()
-    @IsInt()
-    stockQuantity: number; // The available stock quantity
-
-    @IsOptional()
-    @IsString()
-    imageUrl: string; // URL for the product image
-
-    @IsOptional()
-    @IsString()
-    description: string; // A description of the product
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => ItemDto)
+  items: ItemDto[];
 }
